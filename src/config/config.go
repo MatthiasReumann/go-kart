@@ -1,13 +1,15 @@
 package config
 
 type Endpoint struct {
-	Path       string
-	Dockerfile string
+	Path          string
+	DockerfileTar string
+	Tags          []string
 }
 
-func NewEndpoint(path string, dockerfile string) Endpoint {
+func NewEndpoint(path, dockerfileTar string, tags []string) Endpoint {
 	return Endpoint{
-		Path:       path,
-		Dockerfile: dockerfile,
+		Path:          path,
+		DockerfileTar: dockerfileTar,
+		Tags:          tags,
 	}
 }

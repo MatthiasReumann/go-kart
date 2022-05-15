@@ -24,7 +24,13 @@ func handleRequest(endpoint config.Endpoint) http.HandlerFunc {
 		switch request.Method {
 		case http.MethodPost:
 			{
-				err := dockerClient.Build(endpoint.Dockerfile)
+				err := dockerClient.Build(endpoint.DockerfileTar, endpoint.Tags)
+				if err != nil {
+					log.Println(err)
+					writer.WriteHeader(http.StatusInternalServerError)
+					return
+				}
+				err = dockerClient.Run(endpoint.Tags[0])
 				if err != nil {
 					log.Println(err)
 					writer.WriteHeader(http.StatusInternalServerError)

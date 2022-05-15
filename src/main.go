@@ -9,7 +9,7 @@ import (
 
 func main() {
 	endpoints := []config.Endpoint{
-		{"/test", "/Volumes/T/work/go-kart/test-files/Dockerfile.tar"},
+		{"/test", "/Volumes/T/work/go-kart/test-files/Dockerfile.tar", []string{"mini"}},
 	}
 
 	r := router.NewRouter(endpoints)
