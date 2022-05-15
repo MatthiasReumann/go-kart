@@ -27,12 +27,12 @@ func NewDockerClient() (DockerClient, error) {
 }
 
 func (c dockerClient) Build(dockerfile string) error {
-	ctx := context.Background()
-	f, err := os.Open(dockerfile)
+	buildContext, err := os.Open(dockerfile)
 	if err != nil {
 		return err
 	}
-	_, err = c.cli.ImageBuild(ctx, f, types.ImageBuildOptions{})
+	buildOptions := types.ImageBuildOptions{Dockerfile: "Dockerfile", Tags: []string{"mini"}}
+	_, err = c.cli.ImageBuild(context.Background(), buildContext, buildOptions)
 	return err
 }
 
